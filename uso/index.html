@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentacion para Django Payments">
+        <meta name="description" content="Pasarelas de pago chilenas para django-payments">
       
       
         <meta name="author" content="mariofix <yo@mariofix.com>">
@@ -26,7 +26,7 @@
     
     
       
-        <title>Uso - Django Payments Chile</title>
+        <title>Uso - django-payments-chile</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#que-es-django-payments-chile" class="md-skip">
+        <a href="#introduccion-a-django-payments-chile" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -92,10 +92,10 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href=".." title="Django Payments Chile" class="md-header__button md-logo" aria-label="Django Payments Chile" data-md-component="logo">
+    <a href=".." title="django-payments-chile" class="md-header__button md-logo" aria-label="django-payments-chile" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h2v3.33L13 7h2l-3 5 3 5h-2l-2-3.33V17H9zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.79 23c-.42-.17-.72-.55-.79-1-.05-.26 0-.44.4-1.16 1.5-2.7 2.27-5.75 2.23-8.84.04-3-.69-5.93-2.13-8.56-.21-.44-.4-.86-.56-1.31.06-.38.25-.73.56-.94.45-.24 1-.19 1.41.09.28.36.52.72.72 1.14A21.4 21.4 0 0 1 20.8 9c.23 1.81.26 3.65.09 5.47-.31 2.34-1 4.6-2.06 6.71-.64 1.28-1 1.82-1.38 1.82h-.66m-4.36-2.21c-.57-.16-.93-.74-.81-1.32 0-.12.31-.67.59-1.23 1.18-2.27 1.69-4.83 1.46-7.38-.14-1.83-.67-3.61-1.54-5.22-.63-1.26-.67-1.46-.3-2 .44-.49 1.17-.56 1.71-.14.72 1.06 1.29 2.22 1.71 3.44 1.28 3.79 1.08 7.92-.56 11.56-.84 1.89-1.43 2.5-2.26 2.24zm-4.5-2.23a1.31 1.31 0 0 1-.73-.86c0-.2 0-.46.45-1.26a8.99 8.99 0 0 0 0-8.68C7 6.5 7 6.24 7.53 5.76c.19-.22.47-.33.77-.29.64 0 1 .31 1.54 1.44A10.5 10.5 0 0 1 11.12 12c.04 1.81-.4 3.61-1.27 5.2-.54 1.05-.81 1.3-1.35 1.39-.19.02-.39 0-.57-.09zm-4.21-2.13c-.33-.16-.59-.43-.72-.78-.1-.35 0-.65.4-1.29.5-.68.74-1.52.69-2.36.07-.85-.16-1.69-.65-2.39A6 6 0 0 1 3 8.82c-.11-.63.31-1.23 1-1.35.54-.1.92.13 1.42.89a6.62 6.62 0 0 1 0 7.27c-.51.77-1.09 1-1.69.8z"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -106,7 +106,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Django Payments Chile
+            django-payments-chile
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -323,13 +323,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Django Payments Chile" class="md-nav__button md-logo" aria-label="Django Payments Chile" data-md-component="logo">
+    <a href=".." title="django-payments-chile" class="md-nav__button md-logo" aria-label="django-payments-chile" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h2v3.33L13 7h2l-3 5 3 5h-2l-2-3.33V17H9zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 2v14h14V5z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.79 23c-.42-.17-.72-.55-.79-1-.05-.26 0-.44.4-1.16 1.5-2.7 2.27-5.75 2.23-8.84.04-3-.69-5.93-2.13-8.56-.21-.44-.4-.86-.56-1.31.06-.38.25-.73.56-.94.45-.24 1-.19 1.41.09.28.36.52.72.72 1.14A21.4 21.4 0 0 1 20.8 9c.23 1.81.26 3.65.09 5.47-.31 2.34-1 4.6-2.06 6.71-.64 1.28-1 1.82-1.38 1.82h-.66m-4.36-2.21c-.57-.16-.93-.74-.81-1.32 0-.12.31-.67.59-1.23 1.18-2.27 1.69-4.83 1.46-7.38-.14-1.83-.67-3.61-1.54-5.22-.63-1.26-.67-1.46-.3-2 .44-.49 1.17-.56 1.71-.14.72 1.06 1.29 2.22 1.71 3.44 1.28 3.79 1.08 7.92-.56 11.56-.84 1.89-1.43 2.5-2.26 2.24zm-4.5-2.23a1.31 1.31 0 0 1-.73-.86c0-.2 0-.46.45-1.26a8.99 8.99 0 0 0 0-8.68C7 6.5 7 6.24 7.53 5.76c.19-.22.47-.33.77-.29.64 0 1 .31 1.54 1.44A10.5 10.5 0 0 1 11.12 12c.04 1.81-.4 3.61-1.27 5.2-.54 1.05-.81 1.3-1.35 1.39-.19.02-.39 0-.57-.09zm-4.21-2.13c-.33-.16-.59-.43-.72-.78-.1-.35 0-.65.4-1.29.5-.68.74-1.52.69-2.36.07-.85-.16-1.69-.65-2.39A6 6 0 0 1 3 8.82c-.11-.63.31-1.23 1-1.35.54-.1.92.13 1.42.89a6.62 6.62 0 0 1 0 7.27c-.51.77-1.09 1-1.69.8z"/></svg>
 
     </a>
-    Django Payments Chile
+    django-payments-chile
   </label>
   
     <div class="md-nav__source">
@@ -419,46 +419,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#paso-1-preparar-tu-entorno" class="md-nav__link">
+  <a href="#requisitos" class="md-nav__link">
     <span class="md-ellipsis">
-      Paso 1: Preparar tu entorno
+      Requisitos
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#paso-2-instalar-las-bibliotecas-necesarias" class="md-nav__link">
+  <a href="#instalacion" class="md-nav__link">
     <span class="md-ellipsis">
-      Paso 2: Instalar las bibliotecas necesarias
+      Instalación
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#paso-3-configurar-tu-proyecto-django" class="md-nav__link">
-    <span class="md-ellipsis">
-      Paso 3: Configurar tu proyecto Django
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Paso 3: Configurar tu proyecto Django">
+    <nav class="md-nav" aria-label="Instalación">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-modificar-settingspy" class="md-nav__link">
+  <a href="#instalacion-con-poetry" class="md-nav__link">
     <span class="md-ellipsis">
-      3.1 Modificar settings.py
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32-modificar-urlspy" class="md-nav__link">
-    <span class="md-ellipsis">
-      3.2 Modificar urls.py
+      Instalación con Poetry
     </span>
   </a>
   
@@ -470,27 +452,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#paso-4-crear-un-modelo-de-pago" class="md-nav__link">
+  <a href="#configuracion-del-proyecto" class="md-nav__link">
     <span class="md-ellipsis">
-      Paso 4: Crear un modelo de pago
+      Configuración del Proyecto
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración del Proyecto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-el-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crear el Proyecto
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modificar-settingspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar settings.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modificar-urlspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar urls.py
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-del-modelo-de-pago" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación del Modelo de Pago
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#paso-5-usar-django-payments-chile-en-tu-vista" class="md-nav__link">
+  <a href="#implementacion-en-las-vistas" class="md-nav__link">
     <span class="md-ellipsis">
-      Paso 5: Usar django-payments-chile en tu vista
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#paso-6-crear-las-paginas-de-exito-y-fracaso" class="md-nav__link">
-    <span class="md-ellipsis">
-      Paso 6: Crear las páginas de éxito y fracaso
+      Implementación en las Vistas
     </span>
   </a>
   
@@ -499,7 +514,7 @@
         <li class="md-nav__item">
   <a href="#consejos-finales" class="md-nav__link">
     <span class="md-ellipsis">
-      Consejos finales
+      Consejos Finales
     </span>
   </a>
   
@@ -608,105 +623,122 @@
                   
 
 
-<h1 id="que-es-django-payments-chile">¿Qué es django-payments-chile?<a class="headerlink" href="#que-es-django-payments-chile" title="Permanent link">&para;</a></h1>
-<p><code>django-payments-chile</code> es una extensión de Django que te permite procesar pagos en Chile fácilmente. Funciona con <code>django-payments</code>, que es una biblioteca más general para manejar pagos en Django.</p>
-<h2 id="paso-1-preparar-tu-entorno">Paso 1: Preparar tu entorno<a class="headerlink" href="#paso-1-preparar-tu-entorno" title="Permanent link">&para;</a></h2>
-<p>Antes de empezar, asegúrate de tener:</p>
+<h1 id="introduccion-a-django-payments-chile">Introducción a <code>django-payments-chile</code><a class="headerlink" href="#introduccion-a-django-payments-chile" title="Permanent link">&para;</a></h1>
+<p><code>django-payments-chile</code> es una extensión para <code>django-payments</code>, una biblioteca que proporciona una interfaz universal para procesar pagos en aplicaciones Django. Este proyecto añade soporte específico para varios proveedores de pagos chilenos como Flow, Khipu, Webpay, y otros.</p>
+<p>Al ser una extensión de <code>django-payments</code>, su objetivo es facilitar la integración de múltiples proveedores de pago sin necesidad de que desarrolles un sistema desde cero para cada uno.</p>
+<div class="admonition note">
+<p class="admonition-title">TL;DR</p>
+<p>Si prefieres ver una implementación de ejemplo y comenzar rápidamente, puedes clonar el <a href="https://github.com/mariofix/django-payments-chile/tree/main/ejemplo">Repositorio de ejemplo</a>:</p>
+</div>
+<h2 id="requisitos">Requisitos<a class="headerlink" href="#requisitos" title="Permanent link">&para;</a></h2>
+<p>Antes de empezar, asegúrate de tener lo siguiente:</p>
+<ul>
+<li><strong>Python</strong> instalado en tu sistema.</li>
+<li><strong>Django</strong> para gestionar la aplicación web.</li>
+<li><strong>django-payments</strong> como el núcleo para gestionar los pagos.</li>
+<li><strong>django-payments-chile</strong> para integrar proveedores de pago en Chile.</li>
+</ul>
+<h2 id="instalacion">Instalación<a class="headerlink" href="#instalacion" title="Permanent link">&para;</a></h2>
+<h3 id="instalacion-con-poetry">Instalación con Poetry<a class="headerlink" href="#instalacion-con-poetry" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Python instalado en tu computadora.</li>
-<li>Django instalado y un proyecto Django creado.</li>
+<li>
+<p>Crea un nuevo proyecto y entorno virtual con Poetry:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>poetry<span class="w"> </span>new<span class="w"> </span>mi-tienda
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>mi-tienda
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span>python3.10<span class="w">  </span><span class="c1"># Reemplaza con la versión de Python que prefieras</span>
+</code></pre></div>
+</li>
+<li>
+<p>Instala Django, <code>django-payments</code> y <code>django-payments-chile</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>poetry<span class="w"> </span>add<span class="w"> </span>django<span class="w"> </span>django-payments<span class="w"> </span>django-payments-chile
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>poetry<span class="w"> </span>install
+</code></pre></div>
+</li>
 </ol>
-<p>Si no tienes Django, puedes instalarlo con:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>django
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Al instalar <code>django-payments-chile</code>, sus dependencias, como <code>django-payments</code> y <code>django</code>, se instalarán automáticamente.</p>
+</div>
+<h2 id="configuracion-del-proyecto">Configuración del Proyecto<a class="headerlink" href="#configuracion-del-proyecto" title="Permanent link">&para;</a></h2>
+<h3 id="crear-el-proyecto">Crear el Proyecto<a class="headerlink" href="#crear-el-proyecto" title="Permanent link">&para;</a></h3>
+<p>Inicia un nuevo proyecto de Django y una aplicación para gestionar los pagos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>poetry<span class="w"> </span>run<span class="w"> </span>django-admin<span class="w"> </span>startproject<span class="w"> </span>tienda<span class="w"> </span>.
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>poetry<span class="w"> </span>run<span class="w"> </span>django-admin<span class="w"> </span>startapp<span class="w"> </span>pagos
 </code></pre></div>
-<p>Y crear un nuevo proyecto Django con:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>django-admin<span class="w"> </span>startproject<span class="w"> </span>miproyecto
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>miproyecto
-</code></pre></div>
-<h2 id="paso-2-instalar-las-bibliotecas-necesarias">Paso 2: Instalar las bibliotecas necesarias<a class="headerlink" href="#paso-2-instalar-las-bibliotecas-necesarias" title="Permanent link">&para;</a></h2>
-<p>Ahora, vamos a instalar <code>django-payments</code> y <code>django-payments-chile</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>django-payments<span class="w"> </span>django-payments-chile
-</code></pre></div>
-<h2 id="paso-3-configurar-tu-proyecto-django">Paso 3: Configurar tu proyecto Django<a class="headerlink" href="#paso-3-configurar-tu-proyecto-django" title="Permanent link">&para;</a></h2>
-<h3 id="31-modificar-settingspy">3.1 Modificar settings.py<a class="headerlink" href="#31-modificar-settingspy" title="Permanent link">&para;</a></h3>
-<p>Abre el archivo <code>settings.py</code> en tu proyecto Django y agrega estas líneas:</p>
+<h3 id="modificar-settingspy">Modificar <code>settings.py</code><a class="headerlink" href="#modificar-settingspy" title="Permanent link">&para;</a></h3>
+<p>Abre el archivo <code>settings.py</code> de tu proyecto y agrega las siguientes configuraciones de <code>django-payments</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="c1"># ... tus otras apps ...</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="s2">&quot;payments&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">]</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># Configuración para payments</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">PAYMENT_HOST</span> <span class="o">=</span> <span class="s1">&#39;tudominio.cl&#39;</span>  <span class="c1"># Cambia esto por tu dominio real</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">PAYMENT_USES_SSL</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Usa False si no tienes HTTPS</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">PAYMENT_MODEL</span> <span class="o">=</span> <span class="s1">&#39;pagos.modelos.Pago&#39;</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># Configuración para django-payments-chile (ejemplo con Flow)</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="n">PAYMENT_VARIANTS</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="s2">&quot;flow&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;django_payments_chile.FlowProvider&quot;</span><span class="p">,</span> <span class="p">{</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="s2">&quot;api_key&quot;</span><span class="p">:</span> <span class="s2">&quot;tu_api_key_de_flow&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="s2">&quot;api_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;tu_api_secret_de_flow&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="p">})</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="p">}</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="c1"># Otras aplicaciones de tu proyecto...</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="s2">&quot;payments&quot;</span><span class="p">,</span>  <span class="c1"># Core de django-payments</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="s2">&quot;pagos&quot;</span><span class="p">,</span>  <span class="c1"># Tu app personalizada para manejar pagos</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">]</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Configuración de django-payments</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">PAYMENT_HOST</span> <span class="o">=</span> <span class="s1">&#39;mi-tienda.cl&#39;</span>  <span class="c1"># Reemplaza con tu dominio</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">PAYMENT_USES_SSL</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Usa True si tienes HTTPS, False en caso contrario</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="n">PAYMENT_MODEL</span> <span class="o">=</span> <span class="s1">&#39;pagos.modelos.Pago&#39;</span>  <span class="c1"># Modelo personalizado para pagos</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1"># Configuración para proveedores chilenos (ejemplo con Flow)</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="n">PAYMENT_VARIANTS</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="s2">&quot;flow&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;django_payments_chile.FlowProvider&quot;</span><span class="p">,</span> <span class="p">{</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="s2">&quot;api_key&quot;</span><span class="p">:</span> <span class="s2">&quot;tu_api_key_de_flow&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>        <span class="s2">&quot;api_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;tu_api_secret_de_flow&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>    <span class="p">})</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="p">}</span>
 </code></pre></div>
-<p>Nota: Reemplaza 'tudominio.cl', 'tu_api_key_de_flow' y 'tu_api_secret_de_flow' con tus datos reales.</p>
-<h3 id="32-modificar-urlspy">3.2 Modificar urls.py<a class="headerlink" href="#32-modificar-urlspy" title="Permanent link">&para;</a></h3>
-<p>Abre el archivo <code>urls.py</code> principal de tu proyecto y agrega esta línea:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Asegúrate de reemplazar <code>'mi-tienda.cl'</code>, <code>'tu_api_key_de_flow'</code> y <code>'tu_api_secret_de_flow'</code> con tus datos reales.</p>
+</div>
+<h3 id="modificar-urlspy">Modificar <code>urls.py</code><a class="headerlink" href="#modificar-urlspy" title="Permanent link">&para;</a></h3>
+<p>Incluye las rutas necesarias en el archivo <code>urls.py</code> de tu proyecto o aplicación:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">include</span><span class="p">,</span> <span class="n">path</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="c1"># ... tus otras URLs ...</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="c1"># Otras rutas...</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;payments/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;payments.urls&#39;</span><span class="p">)),</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">]</span>
 </code></pre></div>
-<h2 id="paso-4-crear-un-modelo-de-pago">Paso 4: Crear un modelo de pago<a class="headerlink" href="#paso-4-crear-un-modelo-de-pago" title="Permanent link">&para;</a></h2>
-<p>Crea un nuevo archivo llamado <code>modelos.py</code> en una app de tu proyecto (por ejemplo, en una app llamada 'pagos') y agrega este código:</p>
+<h2 id="creacion-del-modelo-de-pago">Creación del Modelo de Pago<a class="headerlink" href="#creacion-del-modelo-de-pago" title="Permanent link">&para;</a></h2>
+<p>Crea el modelo de pago en el archivo <code>pagos/modelos.py</code>, que gestionará los pagos y las redirecciones según el éxito o fracaso de los mismos:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span> <span class="nn">payments.models</span> <span class="kn">import</span> <span class="n">BasePayment</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">class</span> <span class="nc">Pago</span><span class="p">(</span><span class="n">BasePayment</span><span class="p">):</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="k">def</span> <span class="nf">get_failure_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;https://</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">PAYMENT_HOST</span><span class="si">}</span><span class="s2">/payments/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pk</span><span class="si">}</span><span class="s2">/failure&quot;</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;https://</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">PAYMENT_HOST</span><span class="si">}</span><span class="s2">/payments/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pk</span><span class="si">}</span><span class="s2">/success&quot;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="c1"># Redirige a esta URL si el pago falla</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;https://</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">PAYMENT_HOST</span><span class="si">}</span><span class="s2">/payments/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pk</span><span class="si">}</span><span class="s2">/failure&quot;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="k">def</span> <span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="c1"># Redirige a esta URL si el pago es exitoso</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;https://</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">PAYMENT_HOST</span><span class="si">}</span><span class="s2">/payments/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pk</span><span class="si">}</span><span class="s2">/success&quot;</span>
 </code></pre></div>
-<p>No olvides crear la app 'pagos' si no existe:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>python<span class="w"> </span>manage.py<span class="w"> </span>startapp<span class="w"> </span>pagos
+<h2 id="implementacion-en-las-vistas">Implementación en las Vistas<a class="headerlink" href="#implementacion-en-las-vistas" title="Permanent link">&para;</a></h2>
+<p>Usa <code>django-payments</code> en tus vistas para procesar pagos con los distintos proveedores. Aquí tienes un ejemplo de cómo crear y procesar un pago:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">redirect</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span> <span class="nn">payments</span> <span class="kn">import</span> <span class="n">get_payment_model</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="k">def</span> <span class="nf">crear_pago</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">Payment</span> <span class="o">=</span> <span class="n">get_payment_model</span><span class="p">()</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">payment</span> <span class="o">=</span> <span class="n">Payment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="n">variant</span><span class="o">=</span><span class="s1">&#39;flow&#39;</span><span class="p">,</span>  <span class="c1"># Debe coincidir con el nombre en PAYMENT_VARIANTS</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Pago por Orden #123&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        <span class="n">total</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>  <span class="c1"># Monto en centavos (100 pesos)</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        <span class="n">currency</span><span class="o">=</span><span class="s1">&#39;CLP&#39;</span><span class="p">,</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        <span class="n">billing_first_name</span><span class="o">=</span><span class="s1">&#39;Juan&#39;</span><span class="p">,</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>        <span class="n">billing_last_name</span><span class="o">=</span><span class="s1">&#39;Pérez&#39;</span><span class="p">,</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>        <span class="n">billing_email</span><span class="o">=</span><span class="s1">&#39;juan.perez@example.com&#39;</span><span class="p">,</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    <span class="p">)</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>    <span class="c1"># Redirige al usuario a la URL del proveedor de pagos</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">payment</span><span class="o">.</span><span class="n">get_process_url</span><span class="p">())</span>
 </code></pre></div>
-<p>Y agrégala a INSTALLED_APPS en settings.py:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="c1"># ... otras apps ...</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="s2">&quot;pagos&quot;</span><span class="p">,</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">]</span>
-</code></pre></div>
-<h2 id="paso-5-usar-django-payments-chile-en-tu-vista">Paso 5: Usar django-payments-chile en tu vista<a class="headerlink" href="#paso-5-usar-django-payments-chile-en-tu-vista" title="Permanent link">&para;</a></h2>
-<p>Ahora puedes usar django-payments-chile en tus vistas. Aquí tienes un ejemplo:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">redirect</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span> <span class="nn">payments</span> <span class="kn">import</span> <span class="n">get_payment_model</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">def</span> <span class="nf">crear_pago</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="n">Payment</span> <span class="o">=</span> <span class="n">get_payment_model</span><span class="p">()</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="n">payment</span> <span class="o">=</span> <span class="n">Payment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>        <span class="n">variant</span><span class="o">=</span><span class="s1">&#39;flow&#39;</span><span class="p">,</span>  <span class="c1"># Esto debe coincidir con lo que pusiste en PAYMENT_VARIANTS</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Pago por Orden #123&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>        <span class="n">total</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>  <span class="c1"># Monto en centavos (100 pesos)</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>        <span class="n">currency</span><span class="o">=</span><span class="s1">&#39;CLP&#39;</span><span class="p">,</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>        <span class="n">billing_first_name</span><span class="o">=</span><span class="s1">&#39;Juan&#39;</span><span class="p">,</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>        <span class="n">billing_last_name</span><span class="o">=</span><span class="s1">&#39;Pérez&#39;</span><span class="p">,</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>        <span class="n">billing_email</span><span class="o">=</span><span class="s1">&#39;juan.perez@example.com&#39;</span><span class="p">,</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>    <span class="p">)</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">payment</span><span class="o">.</span><span class="n">get_process_url</span><span class="p">())</span>
-</code></pre></div>
-<h2 id="paso-6-crear-las-paginas-de-exito-y-fracaso">Paso 6: Crear las páginas de éxito y fracaso<a class="headerlink" href="#paso-6-crear-las-paginas-de-exito-y-fracaso" title="Permanent link">&para;</a></h2>
-<p>No olvides crear las páginas a las que se redirigirá después del pago (éxito o fracaso). Puedes hacerlo creando nuevas vistas y templates.</p>
-<h2 id="consejos-finales">Consejos finales<a class="headerlink" href="#consejos-finales" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Siempre prueba en un entorno de desarrollo antes de ir a producción.</li>
-<li>Mantén seguros tus datos de API (keys, secrets). No los subas a repositorios públicos.</li>
-<li>Lee la documentación oficial de django-payments y django-payments-chile para más detalles.</li>
-<li>¡No dudes en pedir ayuda en foros de Django si te atascas!</li>
-</ol>
-<p>Recuerda que cada paso puede requerir más configuración dependiendo de tu proyecto específico.</p>
+<h2 id="consejos-finales">Consejos Finales<a class="headerlink" href="#consejos-finales" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Pruebas</strong>: Asegúrate de probar la implementación en un entorno de desarrollo antes de desplegarla en producción.</li>
+<li><strong>Seguridad</strong>: No subas tus claves de API o secretos a repositorios públicos. Utiliza archivos de entorno o servicios seguros para gestionarlos.</li>
+<li><strong>Documentación Adicional</strong>: Consulta la documentación oficial de <a href="https://django-payments.readthedocs.io/">django-payments</a> para conocer todas las opciones y configuraciones avanzadas.</li>
+<li><strong>Soporte</strong>: Si tienes dudas o problemas <a href="https://github.com/mariofix/django-payments-chile/discussions">haz tu pregunta</a>.</li>
+</ul>
 
 
 
@@ -714,36 +746,6 @@
 
 
 
-
-  <aside class="md-source-file">
-    
-    
-    
-    
-      
-  <span class="md-source-file__fact">
-    
-      
-  <span class="md-icon" title="Contribuidores">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"/></svg>
-  </span>
-  <span>GitHub</span>
-
-    
-    <nav>
-      
-        <a href="https://github.com/mariofix" class="md-author" title="@mariofix">
-          
-          <img src="https://avatars.githubusercontent.com/u/5313331?v=4&size=72" alt="mariofix">
-        </a>
-      
-      
-      
-    </nav>
-  </span>
-
-    
-  </aside>
 
 
 
