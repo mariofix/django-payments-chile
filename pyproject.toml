@@ -52,7 +52,7 @@ coverage = "^7.6.1"
 pytest = "^8.3.3"
 faker = "^30.0.0"
 mkdocs = "^1.4.3"
-mkdocs-material = "^9.1.18"
+mkdocs-material = "^9.5.39"
 mkdocstrings = { extras = ["python"], version = ">=0.22,<0.27" }
 mkdocs-git-revision-date-localized-plugin = "^1.2.0"
 mkdocs-git-committers-plugin-2 = ">=1.1.2,<3.0.0"
