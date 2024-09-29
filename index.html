@@ -578,6 +578,15 @@
 
 <h1 id="django-payments-chile">django-payments-chile<a class="headerlink" href="#django-payments-chile" title="Permanent link">&para;</a></h1>
 <p><strong>django-payments-chile</strong> es una extensión de <strong>django-payments</strong> que facilita la integración de proveedores de pago en aplicaciones Django para el mercado chileno. Actualmente soporta Flow, Khipu, Webpay, y más.</p>
+<p><img alt="PyPI - Status" src="https://img.shields.io/pypi/status/django-payments-flow" />
+<a href="https://pepy.tech/project/django-payments-flow"><img alt="Downloads" src="https://pepy.tech/badge/django-payments-flow" /></a>
+<a href="https://app.codacy.com/gh/mariofix/django-payments-flow/dashboard?utm_source=gh&amp;utm_medium=referral&amp;utm_content=&amp;utm_campaign=Badge_grade"><img alt="Codacy Badge" src="https://app.codacy.com/project/badge/Grade/7dc3c8d6fe844fdaa1de0cb86c242934" /></a>
+<a href="https://app.codacy.com/gh/mariofix/django-payments-flow/dashboard?utm_source=gh&amp;utm_medium=referral&amp;utm_content=&amp;utm_campaign=Badge_coverage"><img alt="Codacy Badge" src="https://app.codacy.com/project/badge/Coverage/7dc3c8d6fe844fdaa1de0cb86c242934" /></a>
+<a href="https://results.pre-commit.ci/latest/github/mariofix/django-payments-flow/main"><img alt="pre-commit.ci status" src="https://results.pre-commit.ci/badge/github/mariofix/django-payments-flow/main.svg" /></a>
+<img alt="PyPI" src="https://img.shields.io/pypi/v/django-payments-flow" />
+<img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/django-payments-flow" />
+<img alt="PyPI - Implementation" src="https://img.shields.io/pypi/implementation/django-payments-flow" />
+<img alt="PyPI - License" src="https://img.shields.io/pypi/l/django-payments-flow" /></p>
 <h2 id="caracteristicas">Características<a class="headerlink" href="#caracteristicas" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Soporte para múltiples proveedores de pago en Chile.</li>
@@ -586,9 +595,13 @@
 </ul>
 <h2 id="inicio-rapido">Inicio rápido<a class="headerlink" href="#inicio-rapido" title="Permanent link">&para;</a></h2>
 <h3 id="instalacion">Instalación<a class="headerlink" href="#instalacion" title="Permanent link">&para;</a></h3>
-<p>Asegúrate de tener <code>django-payments</code> instalado, luego instala <code>django-payments-chile</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>django-payments<span class="w"> </span>django-payments-chile
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>django-payments-chile<span class="o">[</span>chile<span class="o">]</span>
 </code></pre></div>
+<ul>
+<li><strong>flow</strong>: Instala extras para Flow.</li>
+<li><strong>khipu</strong>: Instala extras para Khipu.</li>
+<li><strong>todos</strong>: Instala todos los extras.</li>
+</ul>
 <h3 id="configuracion">Configuración<a class="headerlink" href="#configuracion" title="Permanent link">&para;</a></h3>
 <p>En tu archivo <code>settings.py</code>, configura los proveedores de pago que vas a utilizar:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">PAYMENT_VARIANTS</span> <span class="o">=</span> <span class="p">{</span>
@@ -603,32 +616,25 @@
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="c1"># Otros proveedores como khipu, klap, etc.</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">}</span>
 </code></pre></div>
-<p>Asegúrate de haber agregado <code>payments</code> a <code>INSTALLED_APPS</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="o">...</span><span class="p">,</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="s1">&#39;payments&#39;</span><span class="p">,</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="s1">&#39;payments_chile&#39;</span><span class="p">,</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">]</span>
-</code></pre></div>
 <h3 id="creacion-de-un-nuevo-pago">Creación de un nuevo pago<a class="headerlink" href="#creacion-de-un-nuevo-pago" title="Permanent link">&para;</a></h3>
 <p>Con django-payments ya configurado, puedes crear un nuevo pago utilizando los métodos nativos de la librería:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">payments</span> <span class="kn">import</span> <span class="n">get_payment_model</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">Payment</span> <span class="o">=</span> <span class="n">get_payment_model</span><span class="p">()</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">payment</span> <span class="o">=</span> <span class="n">Payment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">variant</span><span class="o">=</span><span class="s1">&#39;flow&#39;</span><span class="p">,</span>  <span class="c1"># o &#39;webpay&#39;, &#39;khipu&#39;, etc.</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Pago por Orden #123&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">total</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="n">currency</span><span class="o">=</span><span class="s1">&#39;CLP&#39;</span><span class="p">,</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="n">billing_first_name</span><span class="o">=</span><span class="s1">&#39;Juan&#39;</span><span class="p">,</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="n">billing_last_name</span><span class="o">=</span><span class="s1">&#39;Pérez&#39;</span><span class="p">,</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="n">billing_email</span><span class="o">=</span><span class="s1">&#39;juan.perez@example.com&#39;</span><span class="p">,</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="p">)</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="c1"># Redirige al usuario al proveedor de pagos</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="n">redirect_url</span> <span class="o">=</span> <span class="n">payment</span><span class="o">.</span><span class="n">get_process_url</span><span class="p">()</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">redirect_url</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">payments</span> <span class="kn">import</span> <span class="n">get_payment_model</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">Payment</span> <span class="o">=</span> <span class="n">get_payment_model</span><span class="p">()</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">payment</span> <span class="o">=</span> <span class="n">Payment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">variant</span><span class="o">=</span><span class="s1">&#39;flow&#39;</span><span class="p">,</span>  <span class="c1"># o &#39;webpay&#39;, &#39;khipu&#39;, debe coincidir con el indice en PAYMENT_VARIANTS</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Pago por Orden #123&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">total</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">currency</span><span class="o">=</span><span class="s1">&#39;CLP&#39;</span><span class="p">,</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">billing_first_name</span><span class="o">=</span><span class="s1">&#39;Juan&#39;</span><span class="p">,</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">billing_last_name</span><span class="o">=</span><span class="s1">&#39;Pérez&#39;</span><span class="p">,</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="n">billing_email</span><span class="o">=</span><span class="s1">&#39;juan.perez@example.com&#39;</span><span class="p">,</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="p">)</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c1"># Redirige al usuario al proveedor de pagos</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="n">redirect_url</span> <span class="o">=</span> <span class="n">payment</span><span class="o">.</span><span class="n">get_process_url</span><span class="p">()</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">redirect_url</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Nota</strong>: <code>django-payments</code> manejará la redirección al proveedor y la confirmación del estado del pago. Solo necesitas configurar correctamente los proveedores.</p>
 <p>Para más detalles sobre el flujo de pago y las respuestas de los proveedores, consulta la sección <a href="configuration.md">configuración</a>.</p>
