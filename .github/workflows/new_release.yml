@@ -49,7 +49,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Set Up Poetry
-        uses: abatilo/actions-poetry@v3
+        uses: abatilo/actions-poetry@v4
         with:
           poetry-version: ${{ matrix.poetry-version }}
       - name: Setup Latest Poetry
@@ -79,7 +79,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
       - name: Set Up Poetry
-        uses: abatilo/actions-poetry@v3
+        uses: abatilo/actions-poetry@v4
       - name: Setup Latest Poetry
         run: pipx install --suffix @main 'poetry @ git+https://github.com/python-poetry/poetry'
       - name: Install django-payments-chile
