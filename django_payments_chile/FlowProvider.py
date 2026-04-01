@@ -1,4 +1,6 @@
-from typing import Any, Optional
+from __future__ import annotations
+
+from typing import Any
 
 import requests
 from django.http import HttpResponseBadRequest, JsonResponse
@@ -46,7 +48,7 @@ class FlowProvider(BasicProvider):
         elif self.api_endpoint == "sandbox":
             self.api_endpoint = "https://sandbox.flow.cl/api"
 
-    def get_form(self, payment, data: Optional[dict] = None) -> Any:
+    def get_form(self, payment, data: dict | None = None) -> Any:
         """
         Genera el formulario de pago para redirigir a la página de pago de Flow.
 
@@ -76,12 +78,12 @@ class FlowProvider(BasicProvider):
             if payment.billing_email:
                 datos_para_flow.update({"email": payment.billing_email})
 
-            datos_para_flow.update(**self._extra_data(payment.attrs))
+            datos_para_flow.update(**self._extra_data(payment.extra_data))
 
             try:
-                payment.attrs.datos_payment_create_flow = datos_para_flow
+                payment.extra_data["datos_payment_create_flow"] = datos_para_flow
                 payment.save()
-            except Exception as e:  # noqa
+            except Exception as e:
                 # Dificil llegar acá, y si llegamos es problema de django-payments
                 raise PaymentError(f"Ocurrió un error al guardar attrs.datos_flow: {e}")  # noqa
             datos_para_flow = dict(sorted(datos_para_flow.items()))
@@ -89,7 +91,11 @@ class FlowProvider(BasicProvider):
             datos_para_flow.update({"s": firma_datos})
 
             try:
-                pago_req = requests.post(f"{self.api_endpoint}/payment/create", data=datos_para_flow, timeout=5)
+                pago_req = requests.post(
+                    f"{self.api_endpoint}/payment/create",
+                    data=datos_para_flow,
+                    timeout=5,
+                )
                 pago_req.raise_for_status()
 
             except Exception as pe:
@@ -98,7 +104,7 @@ class FlowProvider(BasicProvider):
             else:
                 pago = pago_req.json()
                 payment.transaction_id = pago["token"]
-                payment.attrs.respuesta_flow = {
+                payment.extra_data["respuesta_flow"] = {
                     "url": pago["url"],
                     "token": pago["token"],
                     "flowOrder": pago["flowOrder"],
@@ -142,35 +148,29 @@ class FlowProvider(BasicProvider):
         firma_datos = ClienteAPI.genera_firma(datos_para_flow, self.api_secret)
         datos_para_flow.update({"s": firma_datos})
 
-        try:
-            # status = FlowPayment.getStatus(self._client, payment.transaction_id)
-            estado_req = requests.get(f"{self.api_endpoint}/payment/getStatus", data=datos_para_flow, timeout=5)
-            estado_req.raise_for_status()
+        estado_req = requests.get(f"{self.api_endpoint}/payment/getStatus", data=datos_para_flow, timeout=5)
+        estado_req.raise_for_status()
 
-        except Exception as e:
-            raise e
-        else:
-            status = estado_req.json()
-            if status["status"] == 2:
-                payment.change_status(PaymentStatus.CONFIRMED)
-            elif status["status"] == 3:
-                payment.change_status(PaymentStatus.REJECTED)
-            elif status["status"] == 4:
-                payment.change_status(PaymentStatus.ERROR)
+        status = estado_req.json()
+        if status["status"] == 2:
+            payment.change_status(PaymentStatus.CONFIRMED)
+        elif status["status"] == 3:
+            payment.change_status(PaymentStatus.REJECTED)
+        elif status["status"] == 4:
+            payment.change_status(PaymentStatus.ERROR)
         return status
 
-    def _extra_data(self, attrs) -> dict:
+    def _extra_data(self, extra_data) -> dict:
         """Busca los datos que son enviandos por django-payments y los saca del diccionario
 
         Args:
-            attrs ("PaymentAttributeProxy"): Obtenido desde PaymentModel.extra_data
+            extra_data (dict): Obtenido desde PaymentModel.extra_data
 
         Returns:
             dict: Diccionario con valores permitidos.
         """
-        try:
-            data = attrs.datos_extra
-        except AttributeError:
+        data = extra_data.get("datos_extra", {})
+        if not data:
             return {}
 
         prohibidos = [
@@ -188,7 +188,7 @@ class FlowProvider(BasicProvider):
 
         return data
 
-    def refund(self, payment, amount: Optional[int] = None) -> int:
+    def refund(self, payment, amount: int | None = None) -> int:
         """
         Realiza un reembolso del pago.
         El seguimiendo se debe hacer directamente en Flow
@@ -216,7 +216,7 @@ class FlowProvider(BasicProvider):
             "amount": to_refund,
             "urlCallBack": payment.get_process_url(),
             "commerceTrxId": payment.token,
-            "flowTrxId": payment.attrs.respuesta_flow["flowOrder"],
+            "flowTrxId": payment.extra_data["respuesta_flow"]["flowOrder"],
         }
         try:
             refun_req = requests.post(f"{self.api_endpoint}/refund/create", data=datos_reembolso, timeout=5)
@@ -224,7 +224,7 @@ class FlowProvider(BasicProvider):
         except Exception as pe:
             raise PaymentError(pe)
         else:
-            payment.attrs.solicitud_reembolso = refun_req.json()
+            payment.extra_data["solicitud_reembolso"] = refun_req.json()
             payment.save()
             payment.change_status(PaymentStatus.REFUNDED)
             return to_refund

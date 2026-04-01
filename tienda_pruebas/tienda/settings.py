@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+from __future__ import annotations
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -135,8 +137,17 @@ PAYMENT_VARIANTS = {
     "flow": (
         "django_payments_chile.FlowProvider",
         {
-            "api_key": "",
-            "api_secret": "",
+            "api_key": "5C627F95-4523-4AEB-9FBC-7883B1FL43E5",
+            "api_secret": "c08a5046b3bc357bf1cd3db9286e7560b4451501",
+            "api_endpoint": "sandbox",
         },
-    )
+    ),
+    "khipu": (
+        "django_payments_chile.KhipuProvider",
+        {
+            "api_key": "4666b08a-145b-4c6b-bf24-a2675fd8f68d",
+        },
+    ),
 }
+
+# revisar https://transbankdevelopers.cl/documentacion/como_empezar#ambientes para webpay

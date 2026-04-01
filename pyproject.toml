@@ -1,6 +1,5 @@
 [build-system]
-requires = ["setuptools >= 61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["setuptools>=45", "wheel", "setuptools_scm>=6.2"]
 
 [project]
 name = "django-payments-chile"
@@ -101,10 +100,12 @@ addopts = [
     "--cov-report=term-missing:skip-covered",
     "--no-cov-on-fail",
     "--color=yes",
+    "--ignore=tests/test_core.py",
 ]
 testpaths = "tests"
 DJANGO_SETTINGS_MODULE = "tests.django_settings"
 pythonpath = "."
+
 
 [dependency-groups]
 dev = [

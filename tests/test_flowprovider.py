@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from unittest import TestCase
 from unittest.mock import Mock, patch
 
@@ -8,11 +10,6 @@ from django_payments_chile.FlowProvider import FlowProvider
 
 API_KEY = "flow_test_key"  # nosec
 API_SECRET = "flow_test_secret"  # nosec
-
-
-class payment_attrs:
-    session = dict
-    extra_data = dict
 
 
 class Payment(Mock):
@@ -27,7 +24,7 @@ class Payment(Mock):
     captured_amount = 0
     transaction_id = None
     billing_email = "correo@usuario.com"
-    attrs = payment_attrs()
+    extra_data = {}
 
     def change_status(self, status, message=""):
         self.status = status
@@ -49,22 +46,26 @@ class Payment(Mock):
 class TestFlowProvider(TestCase):
     def test_provider_create_session_success(self):
         test_payment = Payment()
-        test_payment.attrs.datos_extra = {"payment_currency": "CLP", "currency": "CLP"}
+        test_payment.extra_data["datos_extra"] = {"payment_currency": "CLP", "currency": "CLP"}
         provider = FlowProvider(api_key=API_KEY, api_secret=API_SECRET)
         with patch("django_payments_chile.FlowProvider.requests.post") as mock_post:
             # Configure mock response
             mock_response = Mock()
             mock_response.raise_for_status.return_value = None  # Simulates no exception raised
-            mock_response.json.return_value = {"url": "https://flow.cl", "token": "TOKEN_ID", "flowOrder": "ORDER_ID"}
+            mock_response.json.return_value = {
+                "url": "https://flow.cl",
+                "token": "TOKEN_ID",
+                "flowOrder": "ORDER_ID",
+            }
             mock_post.return_value = mock_response
 
             with self.assertRaises(RedirectNeeded):
                 provider.get_form(test_payment)
 
             self.assertEqual(test_payment.status, PaymentStatus.WAITING)
-            self.assertEqual(test_payment.attrs.respuesta_flow["url"], "https://flow.cl")
-            self.assertEqual(test_payment.attrs.respuesta_flow["token"], "TOKEN_ID")
-            self.assertEqual(test_payment.attrs.respuesta_flow["flowOrder"], "ORDER_ID")
+            self.assertEqual(test_payment.extra_data["respuesta_flow"]["url"], "https://flow.cl")
+            self.assertEqual(test_payment.extra_data["respuesta_flow"]["token"], "TOKEN_ID")
+            self.assertEqual(test_payment.extra_data["respuesta_flow"]["flowOrder"], "ORDER_ID")
 
     def test_provider_create_session_error(self):
         payment = Payment()
@@ -95,7 +96,11 @@ class TestFlowProvider(TestCase):
             # Configure mock response with transaction ID
             mock_response = Mock()
             mock_response.raise_for_status.return_value = None
-            mock_response.json.return_value = {"url": "https://flow.cl", "token": "TOKEN_ID", "flowOrder": "ORDER_ID"}
+            mock_response.json.return_value = {
+                "url": "https://flow.cl",
+                "token": "TOKEN_ID",
+                "flowOrder": "ORDER_ID",
+            }
             mock_post.return_value = mock_response
 
             with self.assertRaises(RedirectNeeded):

@@ -1,4 +1,6 @@
-from typing import Any, Optional
+from __future__ import annotations
+
+from typing import Any
 
 import requests
 from django.http import JsonResponse
@@ -106,7 +108,7 @@ class WebpayProvider(BasicProvider):
         elif self.api_endpoint == "integracion":
             self.api_endpoint = "https://webpay3gint.transbank.cl/"
 
-    def get_form(self, payment, data: Optional[dict] = None) -> Any:
+    def get_form(self, payment, data: dict | None = None) -> Any:
         """
         Genera el formulario de pago para redirigir a la página de pago.
 
@@ -131,7 +133,7 @@ class WebpayProvider(BasicProvider):
 
             try:
                 pago_req = requests.post(
-                    f"{self.api_endpoint} /rswebpaytransaction/api/webpay/v1.2/transactions",
+                    f"{self.api_endpoint}/rswebpaytransaction/api/webpay/v1.2/transactions",
                     data=datos_para_tbk,
                     timeout=5,
                 )
@@ -143,8 +145,8 @@ class WebpayProvider(BasicProvider):
             else:
                 pago = pago_req.json()
                 payment.transaction_id = pago["token"]
-                payment.attrs.request_tbk = datos_para_tbk
-                payment.attrs.respuesta_tbk = pago
+                payment.extra_data["request_tbk"] = datos_para_tbk
+                payment.extra_data["respuesta_tbk"] = pago
                 payment.save()
                 payment.change_status(PaymentStatus.PREAUTH)
 
@@ -172,7 +174,9 @@ class WebpayProvider(BasicProvider):
         """
 
         if payment.status in [PaymentStatus.WAITING, PaymentStatus.PREAUTH]:
-            self.commit(self.get_token_from_request(None, payment), payment)
+            self.commit(self.get_token_from_request(payment, request), payment)
+
+        return JsonResponse({"status": "ok"})
 
     def get_token_from_request(self, payment, request) -> str:
         """Return payment token from provider request."""
@@ -195,50 +199,42 @@ class WebpayProvider(BasicProvider):
             dict: Diccionario con valores del objeto `PaymentStatus`.
         """
 
-        try:
-            status_req = requests.put(
-                f"{self.api_endpoint}/rswebpaytransaction/api/webpay/v1.2/transactions/{payment.token}",
-                timeout=5,
-                headers=self.genera_headers(),
-            )
-            status_req.raise_for_status()
-        except Exception as e:
-            raise e
-        else:
-            status = status_req.json()
-            payment.attrs.status_response = status
-            payment.save()
+        status_req = requests.put(
+            f"{self.api_endpoint}/rswebpaytransaction/api/webpay/v1.2/transactions/{payment.token}",
+            timeout=5,
+            headers=self.genera_headers(),
+        )
+        status_req.raise_for_status()
 
-            if status["response_code"] == 0:
-                payment.change_status(PaymentStatus.CONFIRMED)
-                return PaymentStatus.CONFIRMED
-            else:
-                payment.change_status(PaymentStatus.REJECTED)
-                return PaymentStatus.REJECTED
+        status = status_req.json()
+        payment.extra_data["status_response"] = status
+        payment.save()
+
+        if status["response_code"] == 0:
+            payment.change_status(PaymentStatus.CONFIRMED)
+            return PaymentStatus.CONFIRMED
+        payment.change_status(PaymentStatus.REJECTED)
+        return PaymentStatus.REJECTED
 
     def commit(self, token, payment):
         """Se debe llamar al procesar el retorno"""
-        try:
-            commit_req = requests.put(
-                f"{self.api_endpoint}/rswebpaytransaction/api/webpay/v1.2/transactions/{token}",
-                timeout=5,
-                headers=self.genera_headers(),
-            )
-            commit_req.raise_for_status()
-        except Exception as e:
-            raise e
-        else:
-            commit = commit_req.json()
-            commit["vci_str"] = self.agrega_info_error("vci", commit["vci"])
-            commit["payment_type_code_str"] = self.agrega_info_error("pago", commit["payment_type_code"])
-            payment.attrs.commit_response = commit
-            payment.save()
-            if commit["status"] == "AUTHORIZED" and commit["response_code"] == 0:
-                raise RedirectNeeded("success")
-            else:
-                raise RedirectNeeded("error")
+        commit_req = requests.put(
+            f"{self.api_endpoint}/rswebpaytransaction/api/webpay/v1.2/transactions/{token}",
+            timeout=5,
+            headers=self.genera_headers(),
+        )
+        commit_req.raise_for_status()
 
-    def refund(self, payment, amount: Optional[int] = None) -> int:
+        commit = commit_req.json()
+        commit["vci_str"] = self.agrega_info_error("vci", commit["vci"])
+        commit["payment_type_code_str"] = self.agrega_info_error("pago", commit["payment_type_code"])
+        payment.extra_data["commit_response"] = commit
+        payment.save()
+        if commit["status"] == "AUTHORIZED" and commit["response_code"] == 0:
+            raise RedirectNeeded("success")
+        raise RedirectNeeded("error")
+
+    def refund(self, payment, amount: int | None = None) -> int:
         """
         Realiza un reembolso del pago.
         El seguimiendo se debe hacer directamente en Flow
@@ -258,37 +254,33 @@ class WebpayProvider(BasicProvider):
             raise PaymentError("El pago debe estar confirmado para reversarse.")
 
         refund_data = {"amount": amount or payment.total}
-        try:
-            refund_req = requests.put(
-                f"{self.api_endpoint}/rswebpaytransaction/api/webpay/v1.2/transactions/{payment.token}/refunds",
-                timeout=5,
-                headers=self.genera_headers(),
-                data=refund_data,
-            )
-            refund_req.raise_for_status()
-        except Exception as e:
-            raise e
-        else:
-            refund = refund_req.json()
-            refund["response_code_str"] = self.agrega_info_error("refund", refund["response_code"])
-            payment.attrs.refund_response = refund
-            payment.save()
+        refund_req = requests.put(
+            f"{self.api_endpoint}/rswebpaytransaction/api/webpay/v1.2/transactions/{payment.token}/refunds",
+            timeout=5,
+            headers=self.genera_headers(),
+            data=refund_data,
+        )
+        refund_req.raise_for_status()
 
-            if refund["type"] == "REVERSED":
-                payment.change_status(PaymentStatus.REFUNDED)
-                return payment.total
-            elif refund["type"] == "NULLIFIED" and refund["response_code"] == 0:
-                payment.change_status(PaymentStatus.REFUNDED)
-                return refund["nullified_amount"]
+        refund = refund_req.json()
+        refund["response_code_str"] = self.agrega_info_error("refund", refund["response_code"])
+        payment.extra_data["refund_response"] = refund
+        payment.save()
+
+        if refund["type"] == "REVERSED":
+            payment.change_status(PaymentStatus.REFUNDED)
+            return payment.total
+        if refund["type"] == "NULLIFIED" and refund["response_code"] == 0:
+            payment.change_status(PaymentStatus.REFUNDED)
+            return refund["nullified_amount"]
 
     def agrega_info_error(self, tipo, codigo):
         if tipo == "vci":
-            return vci_status.get(codigo, None)
-        elif tipo == "pago":
-            return tipo_de_pagos.get(codigo, None)
-        elif tipo == "rechazo_l1":
-            return codigos_rechazo_nivel_1.get(codigo, None)
-        elif tipo == "refund":
-            return codigo_rechazo_refund.get(codigo, None)
-        else:
-            return None
+            return vci_status.get(codigo)
+        if tipo == "pago":
+            return tipo_de_pagos.get(codigo)
+        if tipo == "rechazo_l1":
+            return codigos_rechazo_nivel_1.get(codigo)
+        if tipo == "refund":
+            return codigo_rechazo_refund.get(codigo)
+        return None

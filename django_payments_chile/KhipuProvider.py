@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from decimal import Decimal
-from typing import Any, Optional
+from typing import Any
 
 import requests
 from django.http import HttpResponseBadRequest, JsonResponse
@@ -32,7 +34,7 @@ class KhipuProvider(BasicProvider):
         self.api_endpoint = api_endpoint
         self.api_key = api_key
 
-    def get_form(self, payment, data: Optional[dict] = None) -> Any:
+    def get_form(self, payment, data: dict | None = None) -> Any:
         """
         Genera el formulario de pago para redirigir a la página de pago de Khipu.
 
@@ -60,9 +62,9 @@ class KhipuProvider(BasicProvider):
             if payment.billing_email:
                 datos_para_khipu.update({"payer_email": payment.billing_email})
 
-            datos_para_khipu.update(**self._extra_data(payment.attrs))
+            datos_para_khipu.update(**self._extra_data(payment.extra_data))
 
-            payment.attrs.datos_payment_create = datos_para_khipu
+            payment.extra_data["datos_payment_create"] = datos_para_khipu
             payment.save()
 
             try:
@@ -80,7 +82,7 @@ class KhipuProvider(BasicProvider):
             else:
                 pago = pago_req.json()
                 payment.transaction_id = pago["payment_id"]
-                payment.attrs.respuesta_khipu = {
+                payment.extra_data["respuesta_khipu"] = {
                     "payment_id": pago["payment_id"],
                     "payment_url": pago["payment_url"],
                     "simplified_transfer_url": pago["simplified_transfer_url"],
@@ -125,36 +127,35 @@ class KhipuProvider(BasicProvider):
         Returns:
             dict: Diccionario con valores del objeto `PaymentStatus`.
         """
-        try:
-            estado_req = requests.get(
-                f"{self.api_endpoint}/v3/payments/{payment.token}",
-                timeout=5,
-                headers=self.genera_headers(),
-            )
-            estado_req.raise_for_status()
+        estado_req = requests.get(
+            f"{self.api_endpoint}/v3/payments/{payment.token}",
+            timeout=5,
+            headers=self.genera_headers(),
+        )
+        estado_req.raise_for_status()
 
-        except Exception as e:
-            raise e
-        else:
-            status = estado_req.json()
-            if status["status"] == "done" and status["status_detail"] == "normal":
-                payment.change_status(PaymentStatus.CONFIRMED)
-            elif status["status_detail"] in ["rejected-by-payer", "reversed", "marked-as-abuse"]:
-                payment.change_status(PaymentStatus.REJECTED)
+        status = estado_req.json()
+        if status["status"] == "done" and status["status_detail"] == "normal":
+            payment.change_status(PaymentStatus.CONFIRMED)
+        elif status["status_detail"] in [
+            "rejected-by-payer",
+            "reversed",
+            "marked-as-abuse",
+        ]:
+            payment.change_status(PaymentStatus.REJECTED)
         return status
 
-    def _extra_data(self, attrs) -> dict:
+    def _extra_data(self, extra_data) -> dict:
         """Busca los datos que son enviandos por django-payments y los saca del diccionario
 
         Args:
-            attrs ("PaymentAttributeProxy"): Obtenido desde PaymentModel.extra_data
+            extra_data (dict): Obtenido desde PaymentModel.extra_data
 
         Returns:
             dict: Diccionario con valores permitidos.
         """
-        try:
-            data = attrs.datos_extra
-        except AttributeError:
+        data = extra_data.get("datos_extra", {})
+        if not data:
             return {}
 
         prohibidos = [
@@ -168,7 +169,7 @@ class KhipuProvider(BasicProvider):
 
         return data
 
-    def refund(self, payment, amount: Optional[int] = None) -> int:
+    def refund(self, payment, amount: int | None = None) -> int:
         """
         Realiza un reembolso del pago.
         El seguimiendo se debe hacer directamente en Khipu
@@ -201,7 +202,7 @@ class KhipuProvider(BasicProvider):
         except Exception as pe:
             raise PaymentError(pe)
         else:
-            payment.attrs.solicitud_reembolso = refun_req.json()
+            payment.extra_data["solicitud_reembolso"] = refun_req.json()
             payment.save()
             payment.change_status(PaymentStatus.REFUNDED)
             return to_refund

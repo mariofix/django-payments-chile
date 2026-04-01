@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from unittest import TestCase
 from unittest.mock import Mock, patch
 
@@ -8,11 +10,6 @@ from django_payments_chile.KhipuProvider import KhipuProvider
 
 API_KEY = "khipu_test_key"  # nosec
 API_ENDPOINT = "https://payment-api.khipu.com"
-
-
-class payment_attrs:
-    session = dict
-    extra_data = dict
 
 
 class Payment(Mock):
@@ -27,7 +24,7 @@ class Payment(Mock):
     captured_amount = 0
     transaction_id = None
     billing_email = "correo@usuario.com"
-    attrs = payment_attrs()
+    extra_data = {}
 
     def change_status(self, status, message=""):
         self.status = status
@@ -49,7 +46,7 @@ class Payment(Mock):
 class TestKhipuProvider(TestCase):
     def test_provider_create_session_success(self):
         test_payment = Payment()
-        test_payment.attrs.datos_extra = {"payment_currency": "CLP", "currency": "CLP"}
+        test_payment.extra_data["datos_extra"] = {"payment_currency": "CLP", "currency": "CLP"}
         provider = KhipuProvider(api_key=API_KEY, api_endpoint=API_ENDPOINT)
 
         with patch("django_payments_chile.KhipuProvider.requests.post") as mock_post:
@@ -69,8 +66,11 @@ class TestKhipuProvider(TestCase):
                 provider.get_form(test_payment)
 
             self.assertEqual(test_payment.status, PaymentStatus.WAITING)
-            self.assertEqual(test_payment.attrs.respuesta_khipu["payment_id"], "test_payment_id")
-            self.assertEqual(test_payment.attrs.respuesta_khipu["payment_url"], "https://khipu.com/payment")
+            self.assertEqual(test_payment.extra_data["respuesta_khipu"]["payment_id"], "test_payment_id")
+            self.assertEqual(
+                test_payment.extra_data["respuesta_khipu"]["payment_url"],
+                "https://khipu.com/payment",
+            )
 
     def test_provider_create_session_failure(self):
         test_payment = Payment()
@@ -93,7 +93,10 @@ class TestKhipuProvider(TestCase):
         with patch("django_payments_chile.KhipuProvider.requests.get") as mock_get:
             mock_response = Mock()
             mock_response.raise_for_status.return_value = None
-            mock_response.json.return_value = {"status": "done", "status_detail": "normal"}
+            mock_response.json.return_value = {
+                "status": "done",
+                "status_detail": "normal",
+            }
             mock_get.return_value = mock_response
 
             provider.actualiza_estado(test_payment)
