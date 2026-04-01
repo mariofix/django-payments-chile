@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "django-payments-chile"
-version = "2024.12.5"
+version = "2026.4.0"
 description = "Pasarelas de pago chilenas para django-payments"
 readme = "README.md"
 authors = [{ "name" = "Mario Hernandez", "email" = "mariofix@proton.me" }]
 license = { text = "MIT License" }
-requires-python = ">=3.9,<4.0"
+requires-python = ">=3.10,<4.0"
 
 keywords = [
     "flow",
@@ -29,10 +29,11 @@ keywords = [
 classifiers = [
     "Development Status :: 4 - Beta",
     "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Intended Audience :: Developers",
     "Intended Audience :: Information Technology",
     "Topic :: Software Development :: Libraries :: Python Modules",
@@ -40,7 +41,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
-dependencies = ["django-payments>=2.0, <4.0", "requests"]
+dependencies = ["django-payments>=3.1, <4.0", "requests"]
 
 [project.urls]
 Homepage = "https://mariofix.github.io/django-payments-chile/"
@@ -78,13 +79,13 @@ include = ["django_payments_chile", "tests"]
 
 [tool.black]
 line-length = 119
-target-version = ["py39"]
+target-version = ["py310"]
 
 [tool.isort]
 profile = "black"
 line_length = 119
 multi_line_output = 5
-py_version = 39
+py_version = 310
 src_paths = ["django_payments_chile", "tests"]
 
 

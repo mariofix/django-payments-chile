@@ -17,10 +17,10 @@ jobs:
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Set up uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.6.0
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -43,13 +43,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     needs: crosscheck
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: ${{ matrix.python-version }}
       - name: Set Up Poetry
-        uses: abatilo/actions-poetry@v4
+        uses: abatilo/actions-poetry@3765cf608f2d4a72178a9fc5b918668e542b89b1 # v4.0.0
         with:
           poetry-version: ${{ matrix.poetry-version }}
       - name: Setup Latest Poetry
@@ -75,11 +75,11 @@ jobs:
     permissions:
       id-token: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
       - name: Set Up Poetry
-        uses: abatilo/actions-poetry@v4
+        uses: abatilo/actions-poetry@3765cf608f2d4a72178a9fc5b918668e542b89b1 # v4.0.0
       - name: Setup Latest Poetry
         run: pipx install --suffix @main 'poetry @ git+https://github.com/python-poetry/poetry'
       - name: Install django-payments-chile
@@ -87,4 +87,4 @@ jobs:
       - name: Build django-payments-chile
         run: poetry@main build
       - name: Publish package distributions to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@106e0b0b7c337fa67ed433972f777c6357f78598 # v1.13.0

@@ -30,7 +30,7 @@
 
 ## Instalación
 
-La biblioteca `django-payments-chile` está disponible en PyPi. Puedes instalarla fácilmente con tu gestor de paquetes favorito, como `pip`, `poetry`, o `pipenv`.
+La biblioteca `django-payments-chile` está disponible en PyPi.
 
 ```bash
 pip install django-payments-chile
